@@ -10,3 +10,8 @@ document.getElementById("dashboard").style.display="block"
 document.getElementById("username").innerText=name
 
 }
+function startTest(){
+
+alert("Mock Test coming soon!")
+
+}
