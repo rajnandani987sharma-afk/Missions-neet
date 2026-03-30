@@ -30,7 +30,7 @@ function showQuestion(){
 let q=questions[current]
 
 document.getElementById("question").innerHTML=
-"<h3>Q${current+1}. ${q.q}</h3>"
+'<h3>Q${current+1}. ${q.q}</h3>'
 
 document.getElementById("options").innerHTML=`
 
