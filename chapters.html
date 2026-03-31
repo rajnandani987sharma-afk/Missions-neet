@@ -8,7 +8,7 @@
 
 <body>
 
-<h2 id="title">Select Chapter</h2>
+<h2 id="title"></h2>
 
 <div id="chapters"></div>
 
@@ -16,97 +16,56 @@
 
 let subject = localStorage.getItem("subject")
 
-let physics = [
+let physics=[
 "Units and Dimensions",
 "Motion in Straight Line",
 "Motion in Plane",
 "Laws of Motion",
 "Work Energy Power",
 "Rotational Motion",
-"Gravitation",
-"Mechanical Properties of Solids",
-"Mechanical Properties of Fluids",
-"Thermodynamics",
-"Oscillations",
-"Waves",
-"Electric Charges and Fields",
-"Current Electricity",
-"Magnetism",
-"Electromagnetic Induction",
-"Alternating Current",
-"Ray Optics",
-"Wave Optics",
-"Dual Nature of Matter",
-"Atoms",
-"Nuclei",
-"Semiconductors"
+"Gravitation"
 ]
 
-let chemistry = [
+let chemistry=[
 "Some Basic Concepts",
 "Structure of Atom",
 "Periodic Table",
 "Chemical Bonding",
-"States of Matter",
-"Thermodynamics",
-"Equilibrium",
-"Redox Reaction",
-"Organic Chemistry Basics",
-"Hydrocarbons",
-"Solutions",
-"Electrochemistry",
-"Chemical Kinetics",
-"Surface Chemistry",
-"Biomolecules",
-"Polymers"
+"States of Matter"
 ]
 
-let botany = [
+let botany=[
 "Cell Structure",
 "Biological Classification",
 "Plant Kingdom",
-"Morphology of Flowering Plants",
-"Anatomy of Plants",
-"Transport in Plants",
-"Mineral Nutrition",
-"Photosynthesis",
-"Respiration in Plants",
-"Plant Growth"
+"Morphology of Flowering Plants"
 ]
 
-let zoology = [
+let zoology=[
 "Animal Kingdom",
-"Structural Organisation in Animals",
 "Human Digestion",
 "Breathing and Exchange",
-"Body Fluids",
-"Excretory System",
-"Nervous System",
-"Chemical Coordination",
-"Locomotion",
-"Human Reproduction",
-"Reproductive Health",
-"Human Health and Disease"
+"Body Fluids"
 ]
 
-let chapters = []
+let data=[]
 
-if(subject=="physics"){chapters=physics}
-if(subject=="chemistry"){chapters=chemistry}
-if(subject=="botany"){chapters=botany}
-if(subject=="zoology"){chapters=zoology}
+if(subject=="physics"){data=physics}
+if(subject=="chemistry"){data=chemistry}
+if(subject=="botany"){data=botany}
+if(subject=="zoology"){data=zoology}
 
-document.getElementById("title").innerText = subject.toUpperCase()+" Chapters"
+document.getElementById("title").innerText=subject.toUpperCase()+" Chapters"
 
 let html=""
 
-for(let i=0;i<chapters.length;i++){
+for(let i=0;i<data.length;i++){
 
-html += "<button onclick=\"openTest('"+chapters[i]+"')\">"+chapters[i]+"</button><br><br>"
+html += "<button onclick=\"openTest('"+data[i]+"')\">"+data[i]+"</button><br><br>"
 
 }
 
-document.getElementById("chapters").innerHTML = html
+document.getElementById("chapters").innerHTML=html
 
 
 function openTest(ch){
@@ -120,4 +79,5 @@ window.location.href="test.html"
 </script>
 
 </body>
+
 </html>
