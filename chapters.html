@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+<title>Chapters</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2 id="title"></h2>
+
+<div id="chapters"></div>
+
+<script>
+
+let subject = localStorage.getItem("subject")
+
+let physics = [
+"Units and Dimensions",
+"Motion in Straight Line",
+"Motion in Plane",
+"Laws of Motion",
+"Work Energy Power",
+"Rotational Motion",
+"Gravitation",
+"Mechanical Properties of Solids",
+"Mechanical Properties of Fluids",
+"Thermodynamics",
+"Oscillations",
+"Waves"
+]
+
+let chemistry = [
+"Some Basic Concepts",
+"Structure of Atom",
+"Periodic Table",
+"Chemical Bonding",
+"States of Matter",
+"Thermodynamics",
+"Equilibrium",
+"Redox Reaction",
+"Organic Chemistry Basics",
+"Hydrocarbons"
+]
+
+let botany = [
+"Cell Structure",
+"Biological Classification",
+"Plant Kingdom",
+"Morphology of Flowering Plants",
+"Anatomy of Plants",
+"Photosynthesis",
+"Respiration in Plants",
+"Plant Growth"
+]
+
+let zoology = [
+"Animal Kingdom",
+"Structural Organisation",
+"Biomolecules",
+"Digestion",
+"Breathing",
+"Body Fluids",
+"Excretory System",
+"Nervous System"
+]
+
+let data = []
+
+if(subject=="physics") data = physics
+if(subject=="chemistry") data = chemistry
+if(subject=="botany") data = botany
+if(subject=="zoology") data = zoology
+
+document.getElementById("title").innerText = subject.toUpperCase()+" Chapters"
+
+let html=""
+
+for(let i=0;i<data.length;i++){
+
+html+=`<button onclick="openTest('${data[i]}')">${data[i]}</button><br><br>`
+
+}
+
+document.getElementById("chapters").innerHTML=html
+
+function openTest(ch){
+
+localStorage.setItem("chapter",ch)
+
+window.location.href="test.html"
+
+}
+
+</script>
+
+</body>
+</html>
