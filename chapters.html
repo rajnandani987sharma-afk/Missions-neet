@@ -16,8 +16,13 @@
 
 let subject = localStorage.getItem("subject")
 
-let physics = [
+// SAFETY: अगर subject null हो
+if(!subject){
+document.getElementById("title").innerText="No subject selected"
+}
 
+// PHYSICS CHAPTERS
+let physics = [
 "Units and Dimensions",
 "Motion in Straight Line",
 "Motion in Plane",
@@ -32,7 +37,6 @@ let physics = [
 "Kinetic Theory",
 "Oscillations",
 "Waves",
-
 "Electric Charges and Fields",
 "Electrostatic Potential",
 "Current Electricity",
@@ -47,31 +51,29 @@ let physics = [
 "Atoms",
 "Nuclei",
 "Semiconductors"
-
 ]
 
+// CHEMISTRY CHAPTERS
 let chemistry = [
-
 "Some Basic Concepts",
 "Structure of Atom",
-"Classification of Elements",
+"Periodic Table",
 "Chemical Bonding",
 "States of Matter",
 "Thermodynamics",
 "Equilibrium",
 "Redox Reaction",
 "Hydrogen",
-"s Block Elements",
-"p Block Elements",
+"s Block",
+"p Block",
 "Organic Chemistry Basics",
 "Hydrocarbons",
-
 "Solid State",
 "Solutions",
 "Electrochemistry",
 "Chemical Kinetics",
 "Surface Chemistry",
-"General Principles of Metallurgy",
+"Metallurgy",
 "Haloalkanes",
 "Alcohol Phenol Ether",
 "Aldehydes Ketones",
@@ -80,11 +82,10 @@ let chemistry = [
 "Biomolecules",
 "Polymers",
 "Chemistry in Everyday Life"
-
 ]
 
+// BOTANY
 let botany = [
-
 "Cell Structure",
 "Biological Classification",
 "Plant Kingdom",
@@ -95,7 +96,6 @@ let botany = [
 "Photosynthesis",
 "Respiration in Plants",
 "Plant Growth and Development",
-
 "Reproduction in Organisms",
 "Sexual Reproduction in Flowering Plants",
 "Genetics",
@@ -105,12 +105,11 @@ let botany = [
 "Microbes in Human Welfare",
 "Organisms and Populations",
 "Ecosystem",
-"Biodiversity and Conservation"
-
+"Biodiversity"
 ]
 
+// ZOOLOGY
 let zoology = [
-
 "Animal Kingdom",
 "Structural Organisation in Animals",
 "Human Digestion",
@@ -119,31 +118,31 @@ let zoology = [
 "Excretory System",
 "Nervous System",
 "Chemical Coordination",
-"Locomotion and Movement",
-
+"Locomotion",
 "Reproduction in Humans",
 "Reproductive Health",
 "Human Health and Disease",
-"Strategies for Enhancement in Food Production",
+"Strategies for Food Production",
 "Microbes in Human Welfare",
 "Biotechnology Principles",
 "Biotechnology Applications",
 "Organisms and Populations",
 "Ecosystem",
 "Biodiversity"
-
 ]
 
-let data = []
+let data=[]
 
-if(subject=="physics") data = physics
-if(subject=="chemistry") data = chemistry
-if(subject=="botany") data = botany
-if(subject=="zoology") data = zoology
+// SUBJECT MATCH
+if(subject==="physics"){data=physics}
+if(subject==="chemistry"){data=chemistry}
+if(subject==="botany"){data=botany}
+if(subject==="zoology"){data=zoology}
 
-document.getElementById("title").innerText =
-subject.toUpperCase() + " Chapters"
+// TITLE
+document.getElementById("title").innerText=subject.toUpperCase()+" Chapters"
 
+// CHAPTER BUTTONS
 let html=""
 
 for(let i=0;i<data.length;i++){
@@ -152,8 +151,9 @@ html += `<button onclick="openTest('${data[i]}')">${data[i]}</button><br><br>`
 
 }
 
-document.getElementById("chapters").innerHTML = html
+document.getElementById("chapters").innerHTML=html
 
+// OPEN TEST
 function openTest(ch){
 
 localStorage.setItem("chapter",ch)
@@ -166,4 +166,4 @@ window.location.href="test.html"
 
 </body>
 
-  </html>
+</html>
