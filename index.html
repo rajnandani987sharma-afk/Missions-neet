@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>Mission NEET</title>
 
 <style>
-
 body{
 font-family:Arial;
 text-align:center;
@@ -33,64 +30,100 @@ font-size:16px;
 
 </head>
 
-
 <body>
 
 <h1>Mission NEET</h1>
 
-<div id="box"></div>
-
+<div id="screen"></div>
 
 <script>
 
-let box=document.getElementById("box")
+let screen=document.getElementById("screen")
 
-let name=""
+let studentName=""
 let subject=""
 let chapter=""
 let qIndex=0
 let score=0
 
-let data={
+let chapters={
 
-physics:{
-"Motion":[
-{q:"Unit of velocity?",a:"m/s",b:"kg",c:"N",d:"m",correct:"a"}
+physics:[
+"Units and Dimensions",
+"Motion in Straight Line",
+"Laws of Motion"
+],
+
+chemistry:[
+"Structure of Atom",
+"Chemical Bonding"
+],
+
+botany:[
+"Cell Structure",
+"Plant Kingdom"
+],
+
+zoology:[
+"Animal Kingdom",
+"Human Physiology"
 ]
-},
 
-chemistry:{
-"Atomic Structure":[
+}
+
+let questions={
+
+"Units and Dimensions":[
+{q:"SI unit of length?",a:"meter",b:"second",c:"kg",d:"ampere",correct:"a"}
+],
+
+"Motion in Straight Line":[
+{q:"Velocity unit?",a:"m/s",b:"kg",c:"N",d:"m",correct:"a"}
+],
+
+"Laws of Motion":[
+{q:"F = ma law?",a:"1st",b:"2nd",c:"3rd",d:"none",correct:"b"}
+],
+
+"Structure of Atom":[
 {q:"Electron charge?",a:"positive",b:"negative",c:"neutral",d:"none",correct:"b"}
-]
-},
+],
 
-botany:{
-"Cell":[
-{q:"Powerhouse of cell?",a:"Nucleus",b:"Mitochondria",c:"Golgi",d:"Ribosome",correct:"b"}
-]
-},
+"Chemical Bonding":[
+{q:"NaCl bond?",a:"ionic",b:"covalent",c:"metallic",d:"none",correct:"a"}
+],
 
-zoology:{
-"Human Body":[
+"Cell Structure":[
+{q:"Powerhouse of cell?",a:"nucleus",b:"mitochondria",c:"ribosome",d:"golgi",correct:"b"}
+],
+
+"Plant Kingdom":[
+{q:"Green pigment?",a:"chlorophyll",b:"hemoglobin",c:"melanin",d:"keratin",correct:"a"}
+],
+
+"Animal Kingdom":[
+{q:"Largest group?",a:"arthropoda",b:"mollusca",c:"chordata",d:"annelida",correct:"a"}
+],
+
+"Human Physiology":[
 {q:"Heart chambers?",a:"2",b:"3",c:"4",d:"5",correct:"c"}
 ]
-}
 
 }
+
 
 function showStart(){
 
-box.innerHTML=""
+screen.innerHTML=""
 
-box.innerHTML+=`<input id="name" placeholder="Enter your name"><br><br>`
-box.innerHTML+=`<button onclick="start()">Start NEET Preparation</button>`
+screen.innerHTML+=`<input id="name" placeholder="Enter your name"><br><br>`
+screen.innerHTML+=`<button onclick="start()">Start NEET Preparation</button>`
 
 }
 
 function start(){
 
-name=document.getElementById("name").value
+studentName=document.getElementById("name").value
 
 showSubjects()
 
@@ -98,12 +131,12 @@ showSubjects()
 
 function showSubjects(){
 
-box.innerHTML="<h2>Select Subject</h2>"
+screen.innerHTML="<h2>Select Subject</h2>"
 
-box.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
-box.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
-box.innerHTML+=`<button onclick="openSubject('botany')">Botany</button>`
-box.innerHTML+=`<button onclick="openSubject('zoology')">Zoology</button>`
+screen.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
+screen.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
+screen.innerHTML+=`<button onclick="openSubject('botany')">Botany</button>`
+screen.innerHTML+=`<button onclick="openSubject('zoology')">Zoology</button>`
 
 }
 
@@ -111,13 +144,13 @@ function openSubject(s){
 
 subject=s
 
-box.innerHTML="<h2>Select Chapter</h2>"
+screen.innerHTML="<h2>Select Chapter</h2>"
 
-let chapters=Object.keys(data[s])
+let list=chapters[s]
 
-for(let i=0;i<chapters.length;i++){
+for(let i=0;i<list.length;i++){
 
-box.innerHTML+=`<button onclick="startTest('${chapters[i]}')">${chapters[i]}</button><br>`
+screen.innerHTML+=`<button onclick="startTest('${list[i]}')">${list[i]}</button><br>`
 
 }
 
@@ -135,22 +168,22 @@ showQuestion()
 
 function showQuestion(){
 
-let q=data[subject][chapter][qIndex]
+let q=questions[chapter][qIndex]
 
-box.innerHTML=""
+screen.innerHTML=""
 
-box.innerHTML+=`<h3>${q.q}</h3>`
+screen.innerHTML+=`<h3>${q.q}</h3>`
 
-box.innerHTML+=`<button onclick="answer('a')">${q.a}</button><br>`
-box.innerHTML+=`<button onclick="answer('b')">${q.b}</button><br>`
-box.innerHTML+=`<button onclick="answer('c')">${q.c}</button><br>`
-box.innerHTML+=`<button onclick="answer('d')">${q.d}</button>`
+screen.innerHTML+=`<button onclick="answer('a')">${q.a}</button><br>`
+screen.innerHTML+=`<button onclick="answer('b')">${q.b}</button><br>`
+screen.innerHTML+=`<button onclick="answer('c')">${q.c}</button><br>`
+screen.innerHTML+=`<button onclick="answer('d')">${q.d}</button>`
 
 }
 
 function answer(ans){
 
-let q=data[subject][chapter][qIndex]
+let q=questions[chapter][qIndex]
 
 if(ans==q.correct){
 score++
@@ -158,15 +191,15 @@ score++
 
 qIndex++
 
-if(qIndex<data[subject][chapter].length){
+if(qIndex<questions[chapter].length){
 
 showQuestion()
 
 }else{
 
-box.innerHTML="<h2>Test Finished</h2>"
-box.innerHTML+="Name: "+name+"<br>"
-box.innerHTML+="Score: "+score
+screen.innerHTML="<h2>Test Finished</h2>"
+screen.innerHTML+="Name: "+studentName+"<br>"
+screen.innerHTML+="Score: "+score
 
 }
 
@@ -177,5 +210,4 @@ showStart()
 </script>
 
 </body>
-
 </html>
