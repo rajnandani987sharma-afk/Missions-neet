@@ -95,8 +95,9 @@ function openSubject(s){
 
 subject=s
 
-box.innerHTML="<h2>Select Chapter</h2>"
-
+box.innerHTML="<button onclick='showSubjects()'>⬅ Back</button>"
+box.innerHTML+="<h2>Select Chapter</h2>"
+  
 let chapters=Object.keys(data[s])
 
 for(let i=0;i<chapters.length;i++){
@@ -122,6 +123,9 @@ function showQuestion(){
 let q=data[subject][chapter][qIndex]
 
 box.innerHTML=""
+
+box.innerHTML+=`<button 
+onclick="openSubject(subject)">⬅ Back</button><br><br>`
 
 box.innerHTML+=`<h3>${q.q}</h3>`
 
