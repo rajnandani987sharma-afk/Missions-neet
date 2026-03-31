@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Mission NEET</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f2f2f2;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+font-size:18px;
+background:black;
+color:white;
+border:none;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mission NEET</h1>
+
+<div id="screen"></div>
+
+<script>
+
+let screen=document.getElementById("screen")
+
+let subjects=["Physics","Chemistry","Botany","Zoology"]
+
+let chapters={
+Physics:["Units and Dimensions","Motion in Straight Line","Laws of Motion"],
+Chemistry:["Structure of Atom","Chemical Bonding"],
+Botany:["Cell Structure","Plant Kingdom"],
+Zoology:["Animal Kingdom","Human Physiology"]
+}
+
+function showSubjects(){
+
+screen.innerHTML="<h2>Select Subject</h2>"
+
+subjects.forEach(s=>{
+screen.innerHTML+=`<button onclick="showChapters('${s}')">${s}</button>`
+})
+
+}
+
+function showChapters(subject){
+
+screen.innerHTML="<h2>"+subject+" Chapters</h2>"
+
+chapters[subject].forEach(c=>{
+screen.innerHTML+=`<button>${c}</button><br>`
+})
+
+}
+
+showSubjects()
+
+</script>
+
+</body>
+
+</html>
