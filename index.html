@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>Mission NEET</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <div id="login">
-
 <h2>Mission NEET</h2>
-
 <input id="name" placeholder="Enter your name">
-
 <br><br>
-
 <button onclick="login()">Start Preparation</button>
+</div>
+
+<div id="subjects" style="display:none">
+<h2>Select Subject</h2>
+
+<button onclick="openSubject('physics')">Physics</button>
+<button onclick="openSubject('chemistry')">Chemistry</button>
+<button onclick="openSubject('botany')">Botany</button>
+<button onclick="openSubject('zoology')">Zoology</button>
 
 </div>
 
-<script>
+<div id="chapters" style="display:none"></div>
 
-function login(){
+<div id="test" style="display:none">
 
-let name=document.getElementById("name").value
+<div id="timer"></div>
 
-localStorage.setItem("student",name)
+<div id="question"></div>
+<div id="options"></div>
 
-window.location.href="subjects.html"
+<button onclick="nextQuestion()">Next</button>
+<button onclick="submitTest()">Submit</button>
 
-}
+<div id="palette"></div>
 
-</script>
+</div>
+
+<div id="result" style="display:none"></div>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
