@@ -1,46 +1,25 @@
 body{
 font-family:Arial;
-background:#f2f2f2;
 text-align:center;
+background:#f2f2f2;
 }
 
-#main{
-display:flex;
-justify-content:center;
-gap:40px;
-margin-top:20px;
+button{
+padding:10px;
+margin:10px;
+background:black;
+color:white;
+border:none;
+border-radius:5px;
 }
 
-#palette{
-width:220px;
-}
-
-.paletteBtn{
+#palette button{
 width:40px;
 height:40px;
 margin:4px;
 }
 
-button{
-padding:10px;
-margin:5px;
-background:black;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:#333;
-}
-
 #timer{
-font-size:22px;
+font-size:20px;
 color:red;
-}
-
-#analysis{
-margin-top:30px;
-font-size:18px;
 }
