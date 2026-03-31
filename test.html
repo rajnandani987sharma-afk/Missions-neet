@@ -14,11 +14,38 @@
 
 <script>
 
-let chapter=localStorage.getItem("chapter")
+let subject = localStorage.getItem("subject")
+let chapter = localStorage.getItem("chapter")
 
-document.getElementById("chapter").innerText="Chapter: "+chapter
+let file=""
 
-</script>
+if(subject=="physics"){
+file="questions/physics_"+chapter.toLowerCase().replaceAll(" ","_")+".json"
+}
+
+if(subject=="chemistry"){
+file="questions/chemistry_"+chapter.toLowerCase().replaceAll(" ","_")+".json"
+}
+
+if(subject=="botany"){
+file="questions/botany_"+chapter.toLowerCase().replaceAll(" ","_")+".json"
+}
+
+if(subject=="zoology"){
+file="questions/zoology_"+chapter.toLowerCase().replaceAll(" ","_")+".json"
+}
+
+fetch(file)
+.then(res=>res.json())
+.then(data=>{
+
+questions=data
+
+showQuestion()
+
+})
+
+  </script>
 
 </body>
 
