@@ -499,6 +499,10 @@ box.innerHTML+=`<button id="b" onclick="answer('b')">${q.b}</button><br>`
 box.innerHTML+=`<button id="c" onclick="answer('c')">${q.c}</button><br>`
 box.innerHTML+=`<button id="d" onclick="answer('d')">${q.d}</button>`
 
+box.innerHTML+=`<br><br>
+<button onclick="prevQuestion()">⬅ Back</button>
+<button onclick="nextQuestion()">Next ➡</button>`
+  
 timer=setInterval(function(){
 
 timeLeft--
@@ -553,7 +557,15 @@ box.innerHTML+=`<button onclick="openSubject(subject)">⬅ Back to Chapters</but
 }
 
 }
+  
+function prevQuestion(){
 
+if(qIndex>0){
+qIndex--
+showQuestion()
+}
+
+  }
 
 
 showSubjects()
