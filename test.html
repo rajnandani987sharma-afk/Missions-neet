@@ -2,48 +2,23 @@
 <html>
 
 <head>
-
 <title>Test</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <h2>Mission NEET Test</h2>
+
+<p id="chapter"></p>
+
 <script>
 
-let subject = localStorage.getItem("subject")
-let chapter = localStorage.getItem("chapter")
+let chapter=localStorage.getItem("chapter")
 
-let file = ""
-
-if(subject=="physics") file="questions/physics_motion.json"
-if(subject=="chemistry") file="questions/chemistry_atomic.json"
-if(subject=="botany") file="questions/botany_cell.json"
-if(subject=="zoology") file="questions/zoology_human.json"
-
-fetch(file)
-.then(res => res.json())
-.then(data => {
-
-questions = data
-
-showQuestion()
-
-})
+document.getElementById("chapter").innerText="Chapter: "+chapter
 
 </script>
-<div id="question"></div>
-
-<div id="options"></div>
-
-<br>
-
-<button onclick="nextQuestion()">Next</button>
-
-<script src="script.js"></script>
 
 </body>
 
