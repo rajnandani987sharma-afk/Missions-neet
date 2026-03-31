@@ -14,14 +14,19 @@ background:#f5f5f5;
 }
 
 button{
-padding:10px 20px;
+padding:12px 20px;
 margin:10px;
 font-size:16px;
-border:none;
 background:black;
 color:white;
+border:none;
 border-radius:6px;
 cursor:pointer;
+}
+
+input{
+padding:10px;
+font-size:16px;
 }
 
 </style>
@@ -33,178 +38,141 @@ cursor:pointer;
 
 <h1>Mission NEET</h1>
 
-<div id="screen"></div>
+<div id="box"></div>
 
 
 <script>
 
-let screen=document.getElementById("screen")
+let box=document.getElementById("box")
 
-let currentSubject=""
-let currentChapter=""
-let currentQuestion=0
+let name=""
+let subject=""
+let chapter=""
+let qIndex=0
 let score=0
 
+let data={
 
-let chapters={
-
-physics:[
-"Units and Dimensions",
-"Motion in Straight Line",
-"Laws of Motion"
-],
-
-chemistry:[
-"Structure of Atom",
-"Chemical Bonding"
-],
-
-botany:[
-"Cell Structure",
-"Plant Kingdom"
-],
-
-zoology:[
-"Animal Kingdom",
-"Human Physiology"
+physics:{
+"Motion":[
+{q:"Unit of velocity?",a:"m/s",b:"kg",c:"N",d:"m",correct:"a"}
 ]
+},
 
-}
-
-
-let questions={
-
-"Units and Dimensions":[
-{q:"SI unit of length?",a:"meter",b:"second",c:"kg",d:"ampere",correct:"a"},
-{q:"SI unit of time?",a:"meter",b:"second",c:"kg",d:"ampere",correct:"b"}
-],
-
-"Motion in Straight Line":[
-{q:"Velocity unit?",a:"m/s",b:"kg",c:"N",d:"m",correct:"a"}
-],
-
-"Laws of Motion":[
-{q:"F=ma law?",a:"Newton 1",b:"Newton 2",c:"Newton 3",d:"None",correct:"b"}
-],
-
-"Structure of Atom":[
+chemistry:{
+"Atomic Structure":[
 {q:"Electron charge?",a:"positive",b:"negative",c:"neutral",d:"none",correct:"b"}
-],
-
-"Chemical Bonding":[
-{q:"NaCl bond type?",a:"ionic",b:"covalent",c:"metallic",d:"none",correct:"a"}
-],
-
-"Cell Structure":[
-{q:"Powerhouse of cell?",a:"nucleus",b:"mitochondria",c:"ribosome",d:"golgi",correct:"b"}
-],
-
-"Plant Kingdom":[
-{q:"Green pigment?",a:"chlorophyll",b:"hemoglobin",c:"melanin",d:"keratin",correct:"a"}
-],
-
-"Animal Kingdom":[
-{q:"Largest animal group?",a:"arthropoda",b:"mollusca",c:"chordata",d:"annelida",correct:"a"}
-],
-
-"Human Physiology":[
-{q:"Human heart chambers?",a:"2",b:"3",c:"4",d:"5",correct:"c"}
 ]
+},
+
+botany:{
+"Cell":[
+{q:"Powerhouse of cell?",a:"Nucleus",b:"Mitochondria",c:"Golgi",d:"Ribosome",correct:"b"}
+]
+},
+
+zoology:{
+"Human Body":[
+{q:"Heart chambers?",a:"2",b:"3",c:"4",d:"5",correct:"c"}
+]
+}
 
 }
 
+function showStart(){
 
+box.innerHTML=""
+
+box.innerHTML+=`<input id="name" placeholder="Enter your name"><br><br>`
+box.innerHTML+=`<button onclick="start()">Start NEET Preparation</button>`
+
+}
+
+function start(){
+
+name=document.getElementById("name").value
+
+showSubjects()
+
+}
 
 function showSubjects(){
 
-screen.innerHTML=""
+box.innerHTML="<h2>Select Subject</h2>"
 
-screen.innerHTML+="<h2>Select Subject</h2>"
-
-screen.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
-screen.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
-screen.innerHTML+=`<button onclick="openSubject('botany')">Botany</button>`
-screen.innerHTML+=`<button onclick="openSubject('zoology')">Zoology</button>`
+box.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
+box.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
+box.innerHTML+=`<button onclick="openSubject('botany')">Botany</button>`
+box.innerHTML+=`<button onclick="openSubject('zoology')">Zoology</button>`
 
 }
 
+function openSubject(s){
 
+subject=s
 
-function openSubject(sub){
+box.innerHTML="<h2>Select Chapter</h2>"
 
-currentSubject=sub
+let chapters=Object.keys(data[s])
 
-screen.innerHTML="<h2>Select Chapter</h2>"
+for(let i=0;i<chapters.length;i++){
 
-let list=chapters[sub]
-
-for(let i=0;i<list.length;i++){
-
-screen.innerHTML+=`<button onclick="startTest('${list[i]}')">${list[i]}</button><br>`
+box.innerHTML+=`<button onclick="startTest('${chapters[i]}')">${chapters[i]}</button><br>`
 
 }
 
 }
-
-
 
 function startTest(ch){
 
-currentChapter=ch
-currentQuestion=0
+chapter=ch
+qIndex=0
 score=0
 
 showQuestion()
 
 }
 
-
-
 function showQuestion(){
 
-let q=questions[currentChapter][currentQuestion]
+let q=data[subject][chapter][qIndex]
 
-screen.innerHTML=""
+box.innerHTML=""
 
-screen.innerHTML+=`<h3>${q.q}</h3>`
+box.innerHTML+=`<h3>${q.q}</h3>`
 
-screen.innerHTML+=`<button onclick="answer('a')">${q.a}</button><br>`
-screen.innerHTML+=`<button onclick="answer('b')">${q.b}</button><br>`
-screen.innerHTML+=`<button onclick="answer('c')">${q.c}</button><br>`
-screen.innerHTML+=`<button onclick="answer('d')">${q.d}</button>`
+box.innerHTML+=`<button onclick="answer('a')">${q.a}</button><br>`
+box.innerHTML+=`<button onclick="answer('b')">${q.b}</button><br>`
+box.innerHTML+=`<button onclick="answer('c')">${q.c}</button><br>`
+box.innerHTML+=`<button onclick="answer('d')">${q.d}</button>`
 
 }
-
-
 
 function answer(ans){
 
-let q=questions[currentChapter][currentQuestion]
+let q=data[subject][chapter][qIndex]
 
 if(ans==q.correct){
-
 score++
-
 }
 
-currentQuestion++
+qIndex++
 
-if(currentQuestion<questions[currentChapter].length){
+if(qIndex<data[subject][chapter].length){
 
 showQuestion()
 
 }else{
 
-screen.innerHTML="<h2>Test Complete</h2>"
-screen.innerHTML+="Score: "+score
+box.innerHTML="<h2>Test Finished</h2>"
+box.innerHTML+="Name: "+name+"<br>"
+box.innerHTML+="Score: "+score
 
 }
 
 }
 
-
-
-showSubjects()
+showStart()
 
 </script>
 
