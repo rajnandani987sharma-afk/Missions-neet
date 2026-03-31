@@ -30,15 +30,9 @@ function showQuestion(){
 let q=questions[current]
 
 document.getElementById("question").innerHTML =
-`<h3>Q${current+1}. ${q.q}</h3>`;
+"<h3>Q${current+1}. ${q.q}</h3>"
 
-document.getElementById("options").innerHTML = `
-<button onclick="checkAnswer('a')">${q.a}</button><br><br>
-<button onclick="checkAnswer('b')">${q.b}</button><br><br>
-<button onclick="checkAnswer('c')">${q.c}</button><br><br>
-<button onclick="checkAnswer('d')">${q.d}</button>
-`;
-`
+document.getElementById("options").innerHTML = "<button onclick="checkAnswer('a')">${q.a}</button><br><br> <button onclick="checkAnswer('b')">${q.b}</button><br><br> <button onclick="checkAnswer('c')">${q.c}</button><br><br> <button onclick="checkAnswer('d')">${q.d}</button>"
 
 }
 
@@ -60,7 +54,7 @@ showQuestion()
 
 }else{
 
-document.getElementById("dashboard").innerHTML=
+document.getElementById("dashboard").innerHTML =
 "<h2>Your Score: ${score} / ${questions.length}</h2>"
 
 }
