@@ -9,32 +9,42 @@
 <body>
 
 <div id="login">
-
 <h2>Mission NEET</h2>
-
 <input id="name" placeholder="Enter your name">
-
 <br><br>
-
 <button onclick="login()">Start Preparation</button>
-
 </div>
-
 
 <div id="dashboard" style="display:none">
 
-<h2>Welcome</h2>
+<h2>Mission NEET Mock Test</h2>
 
-<h3 id="username"></h3>
+<div id="timer">Time: 20:00</div>
 
-<button onclick="startTest()">Start Mock Test</button>
+<div id="main">
+
+<div id="questionArea">
+
+<div id="question"></div>
+
+<div id="options"></div>
+
+<br>
+
+<button onclick="nextQuestion()">Next</button>
+
+<button onclick="submitTest()">Submit Test</button>
 
 </div>
 
+<div id="palette"></div>
+
+</div>
+
+</div>
 
 <script src="questions.js"></script>
 <script src="script.js"></script>
 
 </body>
-
 </html>
