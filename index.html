@@ -4,6 +4,7 @@
 <title>Mission NEET</title>
 
 <style>
+
 body{
 font-family:Arial;
 text-align:center;
@@ -21,18 +22,21 @@ border-radius:6px;
 cursor:pointer;
 }
 
-#box{
-margin-top:40px;
+.correct{background:green !important;}
+.wrong{background:red !important;}
+
+#timer{
+font-size:20px;
+margin:20px;
+font-weight:bold;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <h1>Mission NEET</h1>
-
 <div id="box"></div>
 
 <script>
@@ -43,316 +47,179 @@ let subject=""
 let chapter=""
 let qIndex=0
 let score=0
+let timer
+let timeLeft=0
+
 
 let data={
 
 physics:{
+
 "Motion in Straight Line":[
-{q:"Unit of velocity?",a:"m/s",b:"kg",c:"N",d:"m",correct:"a"},
-{q:"Acceleration formula?",a:"v/u",b:"v-u/t",c:"u-v",d:"t/u",correct:"b"}
 
-{q:"A body moves from point A to B (5m) and returns to A. What is the displacement?",
-a:"10m",b:"5m",c:"0m",d:"2.5m",correct:"c"},
-
-{q:"The area under a Velocity-Time graph represents:",
-a:"Acceleration",b:"Displacement",c:"Force",d:"Momentum",correct:"b"},
-
-{q:"A car accelerates from 10m/s to 20m/s in 5 seconds. Acceleration is:",
-a:"2 m/s²",b:"5 m/s²",c:"10 m/s²",d:"4 m/s²",correct:"a"},
-
-{q:"A ball is thrown upwards. At the highest point, its velocity is:",
-a:"9.8 m/s",b:"Maximum",c:"Zero",d:"19.6 m/s",correct:"c"},
-
-{q:"Free fall of an object is an example of:",
-a:"Uniform Velocity",b:"Uniform Acceleration",c:"Variable Acceleration",d:"Rest",correct:"b"},
-
-{q:"If displacement is proportional to square of time, motion is:",
-a:"Uniform Velocity",b:"Uniform Acceleration",c:"Increasing Acceleration",d:"Decreasing Velocity",correct:"b"},
-
-{q:"A particle moves 3m North and then 4m East. Magnitude of displacement?",
-a:"7m",b:"1m",c:"5m",d:"12m",correct:"c"},
-
-{q:"Which quantity can be zero even when distance is non-zero?",
-a:"Speed",b:"Average Speed",c:"Displacement",d:"Mass",correct:"c"},
-
-{q:"Ratio of average velocity to average speed is:",
-a:"=1",b:"<1",c:"≤1",d:">1",correct:"c"},
-
-{q:"Body starts from rest with a=4m/s². Distance in 2s?",
-a:"4m",b:"8m",c:"16m",d:"2m",correct:"b"},
-
-{q:"Velocity-time graph parallel to time axis indicates:",
-a:"Uniform Acceleration",b:"Uniform Velocity",c:"Rest",d:"Variable Acceleration",correct:"b"},
-
-{q:"Average speed for equal distances v1 and v2:",
-a:"(v1+v2)/2",b:"2v1v2/(v1+v2)",c:"√(v1v2)",d:"v1v2/(v1+v2)",correct:"b"},
-
-{q:"Acceleration of body sliding on smooth incline θ:",
-a:"g",b:"g sinθ",c:"g cosθ",d:"g tanθ",correct:"b"},
-
-{q:"Bullet loses half velocity after 3cm penetration. Further penetration?",
-a:"1cm",b:"2cm",c:"3cm",d:"4cm",correct:"a"},
-
-{q:"s = 2t² + 5t +1. Acceleration?",
-a:"4 m/s²",b:"9 m/s²",c:"13 m/s²",d:"5 m/s²",correct:"a"},
-
-{q:"Stone dropped from height h. Time?",
-a:"√(g/2h)",b:"√(2h/g)",c:"2h/g",d:"h/2g",correct:"b"},
-
-{q:"Angle between velocity and acceleration at highest point:",
-a:"0°",b:"45°",c:"90°",d:"180°",correct:"d"},
-
-{q:"Particle moving with constant speed in straight line acceleration:",
-a:"Constant",b:"Variable",c:"Zero",d:"Negative",correct:"c"},
-
-{q:"Distance covered in nth second:",
-a:"u + a/2(2n−1)",b:"u+at",c:"ut+½at²",d:"v²−u²",correct:"a"},
-
-{q:"s-t graph for constant acceleration:",
-a:"Straight line",b:"Parabola",c:"Circle",d:"Hyperbola",correct:"b"},
-
-{q:"Relative velocity of A wrt B (same direction):",
-a:"Va+Vb",b:"Va−Vb",c:"Va×Vb",d:"Vb−Va",correct:"b"},
-
-{q:"Object thrown up 20m/s. Max height?",
-a:"10m",b:"20m",c:"40m",d:"5m",correct:"b"},
-
-{q:"Constant speed but varying velocity possible in:",
-a:"Straight line",b:"No",c:"Circular motion",d:"Rest",correct:"c"},
-
-{q:"Slope of distance-time graph:",
-a:"Velocity",b:"Acceleration",c:"Speed",d:"Displacement",correct:"c"},
-
-{q:"Average speed example question:",
-a:"18 km/h",b:"20 km/h",c:"30 km/h",d:"25 km/h",correct:"a"},
-
-{q:"Average speed for 16m in 4s and 16m in 2s:",
-a:"5.33 m/s",b:"8 m/s",c:"6 m/s",d:"4 m/s",correct:"a"},
-
-{q:"Negative acceleration is:",
-a:"Speedup",b:"Retardation",c:"Uniform motion",d:"Rest",correct:"b"},
-
-{q:"Unit of jerk:",
-a:"m/s²",b:"m/s³",c:"m/s",d:"m²s",correct:"b"},
-
-{q:"If v = At + Bt², dimensions of B:",
-a:"L",b:"LT⁻²",c:"LT⁻³",d:"LT⁻¹",correct:"c"},
-
-{q:"Ball dropped reaches ground in 3s. Height?",
-a:"30m",b:"45m",c:"90m",d:"15m",correct:"b"},
-
-{q:"Displacement can be:",
-a:"Positive only",b:"Negative only",c:"Zero only",d:"All of these",correct:"d"},
-
-{q:"Path length is:",
-a:"Scalar",b:"Vector",c:"Tensor",d:"None",correct:"a"},
-
-{q:"At maximum height in vertical throw:",
-a:"a=0",b:"v=0",c:"v=g",d:"a negative",correct:"b"},
-
-{q:"s = v0 + g/2 + f/3 displacement equation question:",
-a:"v0 + g/2 + f/3",b:"v0 + g + f",c:"g/2 + f/3",d:"v0 + g/2",correct:"a"},
-
-{q:"Ratio of distance to displacement:",
-a:"<1",b:"≥1",c:"=1",d:"≤1",correct:"b"}
-
-{q:"Displacement of a body returning to starting point is:",a:"Positive",b:"Negative",c:"Zero",d:"Infinite",correct:"c"},
-
-{q:"SI unit of velocity is:",a:"m",b:"m/s",c:"m/s²",d:"kg",correct:"b"},
-
-{q:"Area under velocity-time graph gives:",a:"Speed",b:"Acceleration",c:"Displacement",d:"Momentum",correct:"c"},
-
-{q:"If velocity is constant, acceleration is:",a:"Zero",b:"Maximum",c:"Variable",d:"Infinite",correct:"a"},
-
-{q:"Unit of acceleration:",a:"m/s",b:"m²/s",c:"m/s²",d:"kg/s",correct:"c"},
-
-{q:"Velocity is:",a:"Scalar",b:"Vector",c:"Tensor",d:"Constant",correct:"b"},
-
-{q:"Speed is:",a:"Vector",b:"Scalar",c:"Both",d:"None",correct:"b"},
-
-{q:"Slope of velocity-time graph gives:",a:"Acceleration",b:"Velocity",c:"Distance",d:"Momentum",correct:"a"},
-
-{q:"Uniform motion means:",a:"Constant acceleration",b:"Constant velocity",c:"Constant force",d:"Variable velocity",correct:"b"},
-
-{q:"Distance is always:",a:"Vector",b:"Scalar",c:"Negative",d:"Zero",correct:"b"},
-
-{q:"Displacement is:",a:"Scalar",b:"Vector",c:"Constant",d:"Always positive",correct:"b"},
-
-{q:"If velocity increases linearly with time:",a:"Acceleration constant",b:"Acceleration zero",c:"Acceleration variable",d:"Velocity zero",correct:"a"},
-
-{q:"Retardation means:",a:"Positive acceleration",b:"Negative acceleration",c:"Zero acceleration",d:"Infinite acceleration",correct:"b"},
-
-{q:"Average velocity equals:",a:"Total displacement / time",b:"Distance/time",c:"Acceleration/time",d:"Velocity²",correct:"a"},
-
-{q:"Average speed equals:",a:"Distance/time",b:"Displacement/time",c:"Acceleration/time",d:"Force/time",correct:"a"},
-
-{q:"A body at rest has velocity:",a:"Zero",b:"Infinite",c:"Constant",d:"Variable",correct:"a"},
-
-{q:"Unit of jerk:",a:"m/s",b:"m/s²",c:"m/s³",d:"m²/s",correct:"c"},
-
-{q:"Equation of motion:",a:"v=u+at",b:"v=u/t",c:"v=at²",d:"v=ut²",correct:"a"},
-
-{q:"Distance formula:",a:"s=ut+½at²",b:"s=ut",c:"s=vt",d:"s=at",correct:"a"},
-
-{q:"Third equation of motion:",a:"v²=u²+2as",b:"v²=u²+as",c:"v²=as",d:"v²=u²+s",correct:"a"},
-
-{q:"Uniform acceleration means:",a:"Constant acceleration",b:"Zero acceleration",c:"Variable acceleration",d:"Infinite acceleration",correct:"a"},
-
-{q:"Initial velocity symbol:",a:"u",b:"v",c:"a",d:"s",correct:"a"},
-
-{q:"Final velocity symbol:",a:"u",b:"v",c:"a",d:"t",correct:"b"},
-
-{q:"Acceleration symbol:",a:"v",b:"u",c:"a",d:"s",correct:"c"},
-
-{q:"Time symbol:",a:"s",b:"t",c:"v",d:"u",correct:"b"},
-
-{q:"Distance symbol:",a:"d",b:"s",c:"v",d:"t",correct:"b"},
-
-{q:"Velocity-time graph slope gives:",a:"Acceleration",b:"Speed",c:"Distance",d:"Force",correct:"a"},
-
-{q:"If acceleration zero:",a:"Velocity constant",b:"Velocity zero",c:"Velocity infinite",d:"Velocity variable",correct:"a"},
-
-{q:"Free fall acceleration:",a:"9.8 m/s²",b:"1 m/s²",c:"5 m/s²",d:"20 m/s²",correct:"a"},
-
-{q:"Distance covered in 1s with acceleration:",a:"½g",b:"g",c:"2g",d:"g²",correct:"a"},
-
-{q:"Maximum height velocity:",a:"Zero",b:"Maximum",c:"Minimum",d:"Constant",correct:"a"},
-
-{q:"Graph of constant acceleration:",a:"Parabola",b:"Line",c:"Circle",d:"Curve",correct:"a"},
-
-{q:"Graph of constant velocity:",a:"Straight line",b:"Curve",c:"Circle",d:"None",correct:"a"},
-
-{q:"Acceleration dimension:",a:"LT⁻²",b:"LT⁻¹",c:"L",d:"T",correct:"a"},
-
-{q:"Velocity dimension:",a:"LT⁻¹",b:"LT⁻²",c:"L",d:"T",correct:"a"},
-
-{q:"Displacement dimension:",a:"L",b:"LT",c:"LT²",d:"T",correct:"a"},
-
-{q:"Time dimension:",a:"T",b:"L",c:"LT",d:"L/T",correct:"a"},
-
-{q:"Velocity formula:",a:"s/t",b:"t/s",c:"s²/t",d:"t²/s",correct:"a"},
-
+{q:"Displacement returning to start point:",a:"Positive",b:"Negative",c:"Zero",d:"Infinite",correct:"c"},
+{q:"SI unit of velocity:",a:"m",b:"m/s",c:"m/s²",d:"kg",correct:"b"},
+{q:"Velocity is:",a:"Scalar",b:"Vector",c:"Both",d:"None",correct:"b"},
+{q:"Speed is:",a:"Vector",b:"Scalar",c:"Tensor",d:"None",correct:"b"},
+{q:"Unit of acceleration:",a:"m/s",b:"m²",c:"m/s²",d:"kg",correct:"c"},
+{q:"Distance is:",a:"Scalar",b:"Vector",c:"Both",d:"None",correct:"a"},
+{q:"Displacement is:",a:"Scalar",b:"Vector",c:"Both",d:"None",correct:"b"},
+{q:"Average speed:",a:"Distance/time",b:"Displacement/time",c:"Velocity/time",d:"None",correct:"a"},
+{q:"Average velocity:",a:"Distance/time",b:"Displacement/time",c:"Velocity/time",d:"None",correct:"b"},
 {q:"Acceleration formula:",a:"(v-u)/t",b:"v/t",c:"u/t",d:"v²/t",correct:"a"},
 
-{q:"Uniform motion graph:",a:"Straight line",b:"Parabola",c:"Circle",d:"Hyperbola",correct:"a"},
+{q:"Equation v=u+at:",a:"1st eq",b:"2nd eq",c:"3rd eq",d:"None",correct:"a"},
+{q:"Equation s=ut+½at²:",a:"1st",b:"2nd",c:"3rd",d:"4th",correct:"b"},
+{q:"Equation v²=u²+2as:",a:"1st",b:"2nd",c:"3rd",d:"4th",correct:"c"},
+{q:"Uniform motion:",a:"Constant velocity",b:"Variable velocity",c:"Zero velocity",d:"None",correct:"a"},
+{q:"Retardation:",a:"Positive acc",b:"Negative acc",c:"Zero acc",d:"None",correct:"b"},
+{q:"Initial velocity:",a:"u",b:"v",c:"a",d:"s",correct:"a"},
+{q:"Final velocity:",a:"u",b:"v",c:"a",d:"s",correct:"b"},
+{q:"Acceleration symbol:",a:"a",b:"v",c:"u",d:"t",correct:"a"},
+{q:"Time symbol:",a:"t",b:"s",c:"v",d:"a",correct:"a"},
+{q:"Distance symbol:",a:"s",b:"v",c:"t",d:"a",correct:"a"},
 
-{q:"Object at rest acceleration:",a:"Zero",b:"Infinite",c:"Constant",d:"Variable",correct:"a"},
-
-{q:"Distance always:",a:"Positive",b:"Negative",c:"Zero",d:"Infinite",correct:"a"},
-
-{q:"Displacement can be:",a:"Zero",b:"Positive",c:"Negative",d:"All",correct:"d"},
-
+{q:"Free fall acceleration:",a:"9.8",b:"1",c:"5",d:"20",correct:"a"},
+{q:"Maximum height velocity:",a:"Zero",b:"Max",c:"Min",d:"None",correct:"a"},
+{q:"Velocity change:",a:"Acceleration",b:"Force",c:"Speed",d:"Mass",correct:"a"},
+{q:"Slope of velocity-time graph:",a:"Acceleration",b:"Velocity",c:"Distance",d:"Force",correct:"a"},
+{q:"Slope of distance-time graph:",a:"Speed",b:"Acceleration",c:"Velocity",d:"None",correct:"a"},
 {q:"Speed cannot be:",a:"Negative",b:"Positive",c:"Zero",d:"Constant",correct:"a"},
+{q:"Velocity can be:",a:"Positive",b:"Negative",c:"Zero",d:"All",correct:"d"},
+{q:"Distance always:",a:"Positive",b:"Negative",c:"Zero",d:"None",correct:"a"},
+{q:"Displacement can be:",a:"Positive",b:"Negative",c:"Zero",d:"All",correct:"d"},
+{q:"Acceleration dimension:",a:"LT-2",b:"LT-1",c:"L",d:"T",correct:"a"},
 
-{q:"Velocity can be:",a:"Negative",b:"Positive",c:"Zero",d:"All",correct:"d"},
+{q:"Velocity dimension:",a:"LT-1",b:"LT-2",c:"L",d:"T",correct:"a"},
+{q:"Displacement dimension:",a:"L",b:"T",c:"LT",d:"None",correct:"a"},
+{q:"Time dimension:",a:"T",b:"L",c:"LT",d:"None",correct:"a"},
+{q:"Motion in straight line:",a:"1D",b:"2D",c:"3D",d:"4D",correct:"a"},
+{q:"Uniform velocity:",a:"Speed constant",b:"Direction constant",c:"Both",d:"None",correct:"c"},
+{q:"Constant velocity graph:",a:"Straight",b:"Curve",c:"Circle",d:"None",correct:"a"},
+{q:"Constant acceleration graph:",a:"Parabola",b:"Line",c:"Circle",d:"None",correct:"a"},
+{q:"Object at rest acceleration:",a:"Zero",b:"Max",c:"Variable",d:"None",correct:"a"},
+{q:"Relative velocity same direction:",a:"Va+Vb",b:"Va-Vb",c:"Va*Vb",d:"None",correct:"b"},
+{q:"Path length:",a:"Scalar",b:"Vector",c:"Both",d:"None",correct:"a"},
 
-{q:"Velocity change means:",a:"Acceleration",b:"Speed",c:"Force",d:"Mass",correct:"a"},
+{q:"Jerk is:",a:"Rate of acc change",b:"Rate of speed",c:"Rate of distance",d:"None",correct:"a"},
+{q:"Unit of jerk:",a:"m/s³",b:"m/s²",c:"m/s",d:"None",correct:"a"},
+{q:"Acceleration always:",a:"Vector",b:"Scalar",c:"Both",d:"None",correct:"a"},
+{q:"Velocity always:",a:"Vector",b:"Scalar",c:"Both",d:"None",correct:"a"},
+{q:"Speed always:",a:"Scalar",b:"Vector",c:"Both",d:"None",correct:"a"},
+{q:"Distance-time graph straight:",a:"Uniform speed",b:"Acceleration",c:"Rest",d:"None",correct:"a"},
+{q:"Velocity-time horizontal line:",a:"Constant velocity",b:"Acceleration",c:"Rest",d:"None",correct:"a"},
+{q:"Acceleration zero means:",a:"Velocity constant",b:"Velocity zero",c:"Velocity infinite",d:"None",correct:"a"},
+{q:"Straight line motion:",a:"Linear",b:"Circular",c:"Projectile",d:"None",correct:"a"},
+{q:"Acceleration change rate:",a:"Jerk",b:"Snap",c:"Crackle",d:"Pop",correct:"a"}
 
-{q:"Motion in straight line is:",a:"1D motion",b:"2D motion",c:"3D motion",d:"Circular",correct:"a"},
-
-{q:"Acceleration direction:",a:"Velocity change direction",b:"Opposite",c:"Random",d:"Constant",correct:"a"},
-
-{q:"Uniform velocity means:",a:"Constant speed and direction",b:"Speed constant only",c:"Direction only",d:"None",correct:"a"},
-
-{q:"Equation v²=u²+2as is:",a:"Third equation",b:"Second equation",c:"First equation",d:"None",correct:"a"}
-
-]
-
-]
-],
-
-"Laws of Motion":[
-{q:"F=ma is which law?",a:"1st",b:"2nd",c:"3rd",d:"none",correct:"b"}
 ]
 
 },
 
-chemistry:{
-"Structure of Atom":[
-{q:"Electron charge?",a:"positive",b:"negative",c:"neutral",d:"none",correct:"b"}
-]
-},
+chemistry:{},
+botany:{},
+zoology:{}
 
-botany:{
-"Cell":[
-{q:"Powerhouse of cell?",a:"Nucleus",b:"Mitochondria",c:"Golgi",d:"Ribosome",correct:"b"}
-]
-},
-
-zoology:{
-"Human Physiology":[
-{q:"Heart chambers?",a:"2",b:"3",c:"4",d:"5",correct:"c"}
-]
 }
 
-}
+
 
 function showSubjects(){
-
 box.innerHTML=""
-
 box.innerHTML+="<h2>Select Subject</h2>"
-
 box.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
-box.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
-box.innerHTML+=`<button onclick="openSubject('botany')">Botany</button>`
-box.innerHTML+=`<button onclick="openSubject('zoology')">Zoology</button>`
-
 }
+
+
 
 function openSubject(s){
 
 subject=s
 
-box.innerHTML="<button onclick='showSubjects()'>⬅ Back</button>"
+box.innerHTML=`<button onclick="showSubjects()">⬅ Back</button>`
 box.innerHTML+="<h2>Select Chapter</h2>"
-  
+
 let chapters=Object.keys(data[s])
 
 for(let i=0;i<chapters.length;i++){
 
-let count = data[s][chapters[i]] ? data[s][chapters[i]].length : 0
+let count=data[s][chapters[i]].length
 
 box.innerHTML+=`<button onclick="startTest('${chapters[i]}')">${chapters[i]} (${count})</button><br>`
+
 }
 
 }
+
+
 
 function startTest(ch){
 
 chapter=ch
 qIndex=0
 score=0
-
 showQuestion()
 
 }
 
+
+
 function showQuestion(){
+
+clearInterval(timer)
 
 let q=data[subject][chapter][qIndex]
 
-box.innerHTML=""
+timeLeft=60
 
-box.innerHTML+=`<button 
-onclick="openSubject(subject)">⬅ Back</button><br><br>`
-
+box.innerHTML=`<button onclick="openSubject(subject)">⬅ Back</button>`
+box.innerHTML+=`<div id="timer">Time: ${timeLeft}</div>`
 box.innerHTML+=`<h3>${q.q}</h3>`
 
-box.innerHTML+=`<button onclick="answer('a')">${q.a}</button><br>`
-box.innerHTML+=`<button onclick="answer('b')">${q.b}</button><br>`
-box.innerHTML+=`<button onclick="answer('c')">${q.c}</button><br>`
-box.innerHTML+=`<button onclick="answer('d')">${q.d}</button>`
+box.innerHTML+=`<button id="a" onclick="answer('a')">${q.a}</button><br>`
+box.innerHTML+=`<button id="b" onclick="answer('b')">${q.b}</button><br>`
+box.innerHTML+=`<button id="c" onclick="answer('c')">${q.c}</button><br>`
+box.innerHTML+=`<button id="d" onclick="answer('d')">${q.d}</button>`
+
+timer=setInterval(function(){
+
+timeLeft--
+document.getElementById("timer").innerText="Time: "+timeLeft
+
+if(timeLeft<=0){
+clearInterval(timer)
+nextQuestion()
+}
+
+},1000)
 
 }
+
+
 
 function answer(ans){
 
+clearInterval(timer)
+
 let q=data[subject][chapter][qIndex]
 
+let btn=document.getElementById(ans)
+
 if(ans==q.correct){
+btn.classList.add("correct")
 score++
+}else{
+btn.classList.add("wrong")
+document.getElementById(q.correct).classList.add("correct")
 }
+
+setTimeout(nextQuestion,1000)
+
+}
+
+
+
+function nextQuestion(){
 
 qIndex++
 
@@ -362,15 +229,14 @@ showQuestion()
 
 }else{
 
-box.innerHTML="<h2>Test Finished</h2>"
-
-box.innerHTML+="Score: "+score+"<br><br>"
-
-box.innerHTML+="<button onclick='openSubject(subject)'>⬅ Back to Chapters</button>"
+box.innerHTML=`<h2>Test Finished</h2>Score: ${score}/${data[subject][chapter].length}<br><br>`
+box.innerHTML+=`<button onclick="openSubject(subject)">⬅ Back to Chapters</button>`
 
 }
 
 }
+
+
 
 showSubjects()
 
