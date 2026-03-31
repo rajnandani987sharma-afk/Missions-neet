@@ -2,49 +2,41 @@
 <html>
 
 <head>
+
 <title>Mission NEET</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div id="login">
+
 <h2>Mission NEET</h2>
+
 <input id="name" placeholder="Enter your name">
+
 <br><br>
+
 <button onclick="login()">Start Preparation</button>
-</div>
-
-<div id="dashboard" style="display:none">
-
-<h2>Mission NEET Mock Test</h2>
-
-<div id="timer">Time: 20:00</div>
-
-<div id="main">
-
-<div id="questionArea">
-
-<div id="question"></div>
-
-<div id="options"></div>
-
-<br>
-
-<button onclick="nextQuestion()">Next</button>
-
-<button onclick="submitTest()">Submit Test</button>
 
 </div>
 
-<div id="palette"></div>
+<script>
 
-</div>
+function login(){
 
-</div>
+let name=document.getElementById("name").value
 
-<script src="questions.js"></script>
-<script src="script.js"></script>
+localStorage.setItem("student",name)
+
+window.location.href="subjects.html"
+
+}
+
+</script>
 
 </body>
+
 </html>
