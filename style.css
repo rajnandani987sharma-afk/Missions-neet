@@ -1,42 +1,46 @@
 body{
-
-font-family: Arial, sans-serif;
+font-family:Arial;
 background:#f2f2f2;
 text-align:center;
-margin-top:100px;
-
 }
 
-h2{
-
-color:#333;
-
+#main{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:20px;
 }
 
-input{
+#palette{
+width:220px;
+}
 
-padding:10px;
-font-size:16px;
-border:1px solid #ccc;
-border-radius:5px;
-
+.paletteBtn{
+width:40px;
+height:40px;
+margin:4px;
 }
 
 button{
-
-padding:10px 20px;
-font-size:16px;
+padding:10px;
+margin:5px;
 background:black;
 color:white;
 border:none;
 border-radius:5px;
 cursor:pointer;
-margin:10px;
-
 }
 
 button:hover{
-
 background:#333;
+}
 
+#timer{
+font-size:22px;
+color:red;
+}
+
+#analysis{
+margin-top:30px;
+font-size:18px;
 }
