@@ -152,3 +152,17 @@ Score: ${score}<br>
 Predicted Rank: ${rank}`
 
 }
+async function loadQuestions(file){
+
+let res = await fetch("questions/"+file)
+
+filtered = await res.json()
+
+current = 0
+answers = []
+
+createPalette()
+startTimer()
+showQuestion()
+
+}
