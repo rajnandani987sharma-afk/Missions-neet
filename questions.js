@@ -1,7 +1,8 @@
-const questions = [
+const questions=[
 
 {
-q:"Which organelle is called powerhouse of the cell?",
+subject:"Biology",
+q:"Powerhouse of the cell?",
 a:"Nucleus",
 b:"Mitochondria",
 c:"Ribosome",
@@ -10,7 +11,8 @@ correct:"b"
 },
 
 {
-q:"Unit of force is?",
+subject:"Physics",
+q:"Unit of force?",
 a:"Newton",
 b:"Joule",
 c:"Pascal",
@@ -19,7 +21,8 @@ correct:"a"
 },
 
 {
-q:"pH of pure water is?",
+subject:"Chemistry",
+q:"pH of pure water?",
 a:"5",
 b:"6",
 c:"7",
@@ -28,21 +31,53 @@ correct:"c"
 },
 
 {
-q:"Which vitamin is produced in sunlight?",
-a:"Vitamin A",
-b:"Vitamin B",
-c:"Vitamin C",
-d:"Vitamin D",
-correct:"d"
-},
-
-{
-q:"Human heart has how many chambers?",
+subject:"Biology",
+q:"Human heart chambers?",
 a:"2",
 b:"3",
 c:"4",
 d:"5",
 correct:"c"
+},
+
+{
+subject:"Biology",
+q:"Sunlight vitamin?",
+a:"A",
+b:"B",
+c:"C",
+d:"D",
+correct:"d"
+},
+
+{
+subject:"Physics",
+q:"Speed of light?",
+a:"3×10^8",
+b:"3×10^6",
+c:"3×10^5",
+d:"3×10^4",
+correct:"a"
+},
+
+{
+subject:"Chemistry",
+q:"Atomic number of Oxygen?",
+a:"6",
+b:"7",
+c:"8",
+d:"9",
+correct:"c"
+},
+
+{
+subject:"Biology",
+q:"Largest organ of human body?",
+a:"Heart",
+b:"Skin",
+c:"Liver",
+d:"Brain",
+correct:"b"
 }
 
-];
+]
