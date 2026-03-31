@@ -1,37 +1,46 @@
 let current=0
 let answers=[]
-let time=1200
+let filtered=[]
+let time=600
 
 function login(){
 
 document.getElementById("login").style.display="none"
-document.getElementById("dashboard").style.display="block"
+document.getElementById("subjects").style.display="block"
 
-startTimer()
+}
+
+function openSubject(sub){
+
+filtered=questions.filter(q=>q.subject==sub)
+
+document.getElementById("subjects").style.display="none"
+
+let html="<h2>Select Chapter</h2>"
+
+let chapters=[...new Set(filtered.map(q=>q.chapter))]
+
+chapters.forEach(ch=>{
+
+html+=`<button onclick="startTest('${ch}')">${ch}</button><br>`
+
+})
+
+document.getElementById("chapters").innerHTML=html
+document.getElementById("chapters").style.display="block"
+
+}
+
+function startTest(ch){
+
+filtered=filtered.filter(q=>q.chapter==ch)
+
+document.getElementById("chapters").style.display="none"
+document.getElementById("test").style.display="block"
+
 createPalette()
+startTimer()
 showQuestion()
-
-}
-
-function startTimer(){
-
-setInterval(()=>{
-
-time--
-
-let min=Math.floor(time/60)
-let sec=time%60
-
-document.getElementById("timer").innerText=
-"Time: "+min+":"+sec
-
-if(time<=0){
-
-submitTest()
-
-}
-
-},1000)
 
 }
 
@@ -39,10 +48,9 @@ function createPalette(){
 
 let html=""
 
-for(let i=0;i<questions.length;i++){
+for(let i=0;i<filtered.length;i++){
 
-html+=`<button class="paletteBtn"
-onclick="goQuestion(${i})">${i+1}</button>`
+html+=`<button onclick="goQuestion(${i})">${i+1}</button>`
 
 }
 
@@ -57,12 +65,34 @@ showQuestion()
 
 }
 
+function startTimer(){
+
+setInterval(()=>{
+
+time--
+
+let min=Math.floor(time/60)
+let sec=time%60
+
+document.getElementById("timer").innerText=
+"Time "+min+":"+sec
+
+if(time<=0){
+
+submitTest()
+
+}
+
+},1000)
+
+}
+
 function showQuestion(){
 
-let q=questions[current]
+let q=filtered[current]
 
 document.getElementById("question").innerHTML=
-`<h3>Q${current+1}. ${q.q}</h3>`
+`<h3>${q.q}</h3>`
 
 document.getElementById("options").innerHTML=
 
@@ -81,9 +111,10 @@ answers[current]=ans
 
 function nextQuestion(){
 
-if(current<questions.length-1){
-
 current++
+
+if(current<filtered.length){
+
 showQuestion()
 
 }
@@ -94,32 +125,13 @@ function submitTest(){
 
 let score=0
 
-let subjectStats={
-Physics:0,
-Chemistry:0,
-Biology:0
-}
+for(let i=0;i<filtered.length;i++){
 
-let subjectTotal={
-Physics:0,
-Chemistry:0,
-Biology:0
-}
-
-for(let i=0;i<questions.length;i++){
-
-let q=questions[i]
-
-subjectTotal[q.subject]++
-
-if(answers[i]==q.correct){
+if(answers[i]==filtered[i].correct){
 
 score+=4
-subjectStats[q.subject]++
 
-}
-
-else if(answers[i]){
+}else if(answers[i]){
 
 score-=1
 
@@ -127,47 +139,16 @@ score-=1
 
 }
 
-let rank=Math.floor(10000-(score*10))
+let rank=Math.floor(10000-score*10)
 
-let weakSubject="Physics"
+document.getElementById("test").style.display="none"
 
-let min=subjectStats.Physics
+document.getElementById("result").style.display="block"
 
-if(subjectStats.Chemistry<min){
-min=subjectStats.Chemistry
-weakSubject="Chemistry"
-}
-
-if(subjectStats.Biology<min){
-weakSubject="Biology"
-}
-
-document.getElementById("dashboard").innerHTML=
+document.getElementById("result").innerHTML=
 
 `<h2>Result</h2>
-
-Score: ${score}
-
-<br><br>
-
-Predicted Rank: ${rank}
-
-<div id="analysis">
-
-<h3>Detailed Analysis</h3>
-
-Physics Correct: ${subjectStats.Physics}/${subjectTotal.Physics}<br>
-
-Chemistry Correct: ${subjectStats.Chemistry}/${subjectTotal.Chemistry}<br>
-
-Biology Correct: ${subjectStats.Biology}/${subjectTotal.Biology}<br>
-
-<br>
-
-<b>AI Weak Subject: ${weakSubject}</b>
-
-</div>
-
-`
+Score: ${score}<br>
+Predicted Rank: ${rank}`
 
 }
