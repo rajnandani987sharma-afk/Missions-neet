@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<title>Subjects</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h2>Select Subject</h2>
+
+<button onclick="openSubject('physics')">Physics</button>
+
+<button onclick="openSubject('chemistry')">Chemistry</button>
+
+<button onclick="openSubject('botany')">Botany</button>
+
+<button onclick="openSubject('zoology')">Zoology</button>
+
+<script>
+
+function openSubject(sub){
+
+localStorage.setItem("subject",sub)
+
+window.location.href="chapters.html"
+
+}
+
+</script>
+
+</body>
+
+</html>
