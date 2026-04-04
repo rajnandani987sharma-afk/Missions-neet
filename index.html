@@ -689,6 +689,20 @@ timeLeft=60
 box.innerHTML=`<button onclick="openSubject(subject)">⬅ Back</button>`
 box.innerHTML+=`<div id="timer">Time: ${timeLeft}</div>`
 box.innerHTML+=`<h3>${q.q}</h3>`
+box.innerHTML+=`<div id="palette"></div>`
+
+let palette=""
+
+for(let i=0;i<data[subject][chapter].length;i++){
+palette+=`<button onclick="jumpQuestion(${i})">${i+1}</button>`
+}
+
+document.getElementById("palette").innerHTML=palette
+
+function jumpQuestion(n){
+qIndex=n
+showQuestion()
+}
 
 box.innerHTML+=`<button id="a" onclick="answer('a')">${q.a}</button><br>`
 box.innerHTML+=`<button id="b" onclick="answer('b')">${q.b}</button><br>`
@@ -725,10 +739,13 @@ let btn=document.getElementById(ans)
 
 if(ans==q.correct){
 btn.classList.add("correct")
+btn.innerHTML=btn.innerHTML+" ✔️"
 score++
 }else{
 btn.classList.add("wrong")
+btn.innerHTML=btn.innerHTML+" ❌"
 document.getElementById(q.correct).classList.add("correct")
+document.getElementById(q.correct).innerHTML += " ✔️"
 }
 
 setTimeout(nextQuestion,1000)
