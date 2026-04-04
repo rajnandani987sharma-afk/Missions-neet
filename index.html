@@ -689,7 +689,6 @@ timeLeft=60
 box.innerHTML=`<button onclick="openSubject(subject)">⬅ Back</button>`
 box.innerHTML+=`<div id="timer">Time: ${timeLeft}</div>`
 box.innerHTML+=`<h3>${q.q}</h3>`
-box.innerHTML+=`<div id="palette"></div>`
 
 let palette=""
 
@@ -712,6 +711,15 @@ box.innerHTML+=`<button id="d" onclick="answer('d')">${q.d}</button>`
 box.innerHTML+=`<br><br>
 <button onclick="prevQuestion()">⬅ Back</button>
 <button onclick="nextQuestion()">Next ➡</button>`
+box.innerHTML+=`<br><br><div id="palette"></div>`
+
+let palette=""
+
+for(let i=0;i<data[subject][chapter].length;i++){
+palette+=`<button onclick="jumpQuestion(${i})">${i+1}</button>`
+}
+
+document.getElementById("palette").innerHTML=palette
   
 timer=setInterval(function(){
 
