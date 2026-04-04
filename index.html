@@ -510,9 +510,9 @@ let chapters=Object.keys(data[s])
 
 for(let i=0;i<chapters.length;i++){
 
-let count=data[s][chapters[i]].length
-
-box.innerHTML+=`<button onclick="startTest('${chapters[i]}')">${chapters[i]} (${count})</button><br>`
+box.innerHTML+=`<button onclick="startTest('${chapters[i]}')">
+Chapter ${i+1} – ${chapters[i]}
+</button><br>`
 
 }
 
