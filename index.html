@@ -632,18 +632,19 @@ biology:{
 
 },
 
-
 }
-
-
 
 function showSubjects(){
+
 box.innerHTML=""
+
 box.innerHTML+="<h2>Select Subject</h2>"
+
 box.innerHTML+=`<button onclick="openSubject('physics')">Physics</button>`
+box.innerHTML+=`<button onclick="openSubject('chemistry')">Chemistry</button>`
+box.innerHTML+=`<button onclick="openSubject('biology')">Biology</button>`
+
 }
-
-
 
 function openSubject(s){
 
